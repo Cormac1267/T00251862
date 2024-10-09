@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class moveHero : MonoBehaviour
 {
+    public GameObject snowBallCloneTemplate;
+
     Animator animator;
     // Start is called before the first frame update
     void Start()
+
     {
         animator = GetComponent<Animator>();
         if (animator == null)
@@ -23,6 +26,15 @@ public class moveHero : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            GameObject newSnowballGO = Instantiate(snowBallCloneTemplate, transform.position + transform.forward + Vector3.up, Quaternion.identity);
+            snowball myNewSnowball = newSnowballGO.GetComponent<snowball>();
+            myNewSnowball.throwSnowball(transform);
+        }
+
         animator.SetBool("isRunning", false);
         if (Input.GetKey(KeyCode.W))
         {
